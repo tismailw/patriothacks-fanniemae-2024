@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Schools</title>
+</head>
+<body>
+    <h1>Nearby Schools</h1>
+
+    <h2>Elementary Schools</h2>
+    <ul>
+        {% if schools.elementary %}
+            {% for school in schools.elementary %}
+                <li><strong>{{ school.name }}</strong> - Rating: {{ school.rating }} ({{ school.address }})</li>
+            {% endfor %}
+        {% else %}
+            <li>No elementary schools found</li>
+        {% endif %}
+    </ul>
+
+    <h2>Middle Schools</h2>
+    <ul>
+        {% if schools.middle %}
+            {% for school in schools.middle %}
+                <li><strong>{{ school.name }}</strong> - Rating: {{ school.rating }} ({{ school.address }})</li>
+            {% endfor %}
+        {% else %}
+            <li>No middle schools found</li>
+        {% endif %}
+    </ul>
+
+    <h2>High Schools</h2>
+    <ul>
+        {% if schools.high %}
+            {% for school in schools.high %}
+                <li><strong>{{ school.name }}</strong> - Rating: {{ school.rating }} ({{ school.address }})</li>
+            {% endfor %}
+        {% else %}
+            <li>No high schools found</li>
+        {% endif %}
+    </ul>
+
+    <br><br>
+    <form action="/general_info" method="POST">
+        <input type="hidden" name="owner" value="{{ owner }}">
+        <input type="hidden" name="mailing_address" value="{{ mailing_address }}">
+        <input type="hidden" name="total_due" value="{{ total_due }}">
+        <input type="hidden" name="calculated_value" value="{{ calculated_value }}">
+        <input type="hidden" name="map_url" value="{{ map_url }}">
+        <input type="hidden" name="street_view_url" value="{{ street_view_url }}">
+        <input type="hidden" name="lat_lng" value="{{ lat_lng }}">
+        <button type="submit">Go back to General Info</button>
+    </form>
+</body>
+</html>

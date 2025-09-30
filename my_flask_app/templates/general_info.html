@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Info</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+
+    <p><strong>Owner:</strong> {{ owner }}</p>
+    <p><strong>Mailing Address:</strong> {{ mailing_address }}</p>
+    <p><strong>Estimated Value:</strong> {{ calculated_value }}</p>
+    <p><strong>Yearly Property Tax:</strong> {{ total_due }}</p>
+    <p><strong>Lat/Lng:</strong> {{ lat_lng }}</p>
+
+
+
+
+    <!-- Display the Street View Image -->
+    <h2>Street View</h2>
+    <img src="{{ street_view_url }}" alt="Street View of the Home" width="600" height="400">    
+
+
+    <br><br>
+    <form action="/mortgage_page" method="POST">
+    
+        <br><br>
+    
+        <!-- Hidden Fields to pass data to /mortgage route -->
+        <input type="hidden" name="owner" value="{{ owner }}">
+        <input type="hidden" name="mailing_address" value="{{ mailing_address }}">
+        <input type="hidden" name="total_due" value="{{ total_due }}">
+        <input type="hidden" name="calculated_value" value="{{ calculated_value }}">
+        <input type="hidden" name="map_url" value="{{ map_url }}">
+        <input type="hidden" name="street_view_url" value="{{ street_view_url }}">
+        <input type="hidden" name="lat_lng" value="{{ lat_lng }}"> <!-- lat_lng passed here -->
+
+    
+        <button type="submit">Calculate Mortgage</button>
+    </form>
+    
+    <form action="/stuff_near_me" method="POST">
+        <input type="hidden" name="owner" value="{{ owner }}">
+        <input type="hidden" name="mailing_address" value="{{ mailing_address }}">
+        <input type="hidden" name="total_due" value="{{ total_due }}">
+        <input type="hidden" name="calculated_value" value="{{ calculated_value }}">
+        <input type="hidden" name="map_url" value="{{ map_url }}">
+        <input type="hidden" name="street_view_url" value="{{ street_view_url }}">
+        <input type="hidden" name="lat_lng" value="{{ lat_lng }}">
+        <button type="submit">See Stuff Near Me</button>
+    </form>
+
+    <!-- Add a Button to See Weather -->
+    <form action="/weather" method="POST">
+        <input type="hidden" name="owner" value="{{ owner }}">
+        <input type="hidden" name="mailing_address" value="{{ mailing_address }}">
+        <input type="hidden" name="total_due" value="{{ total_due }}">
+        <input type="hidden" name="calculated_value" value="{{ calculated_value }}">
+        <input type="hidden" name="map_url" value="{{ map_url }}">
+        <input type="hidden" name="street_view_url" value="{{ street_view_url }}">
+        <input type="hidden" name="lat_lng" value="{{ lat_lng }}">  <!-- lat_lng passed here -->
+        <button type="submit">See Average Weather for Past Year</button>
+        </form>
+
+        <form action="/schools" method="POST">
+            <input type="hidden" name="lat_lng" value="{{ lat_lng }}">
+            <button type="submit">See Nearby Schools</button>
+        </form>
+                        
+    
+
+    <br><br>
+    <a href="/">Go back to search</a>
+</body>
+</html>

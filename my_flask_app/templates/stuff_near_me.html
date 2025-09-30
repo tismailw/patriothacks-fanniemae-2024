@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Places</title>
+</head>
+<body>
+    <h1>Nearby Places</h1>
+
+    <p><strong>Mailing Address:</strong> {{ mailing_address }}</p>
+
+
+    <h2>Nearby Grocery Stores</h2>
+    <ul>
+        {% for store in grocery_stores %}
+            <li>{{ store.name }}: {{ store.distance }} miles away</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Public Transportation</h2>
+
+    <h3>Bus Stops Near Me</h3>
+    <ul>
+        {% for place in public_transportation if 'bus_station' in place.types %}
+        <li>{{ place.name }}: {{ place.distance }} away</li>
+        {% else %}
+        <li>No bus stations found near this address.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Trains Near Me</h3>
+    <ul>
+        {% for place in public_transportation if 'train_station' in place.types %}
+        <li>{{ place.name }}: {{ place.distance }} away</li>
+        {% else %}
+        <li>No train stations found near this address.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Airports Near Me</h3>
+    <ul>
+        {% for place in public_transportation if 'airport' in place.types %}
+        <li>{{ place.name }}: {{ place.distance }} away</li>
+        {% else %}
+        <li>No airports found near this address.</li>
+        {% endfor %}
+    </ul>
+
+    <br><br>
+    <!-- Go back to general_info.html -->
+    <br><br>
+    <form action="/general_info" method="POST">
+        <input type="hidden" name="owner" value="{{ owner }}">
+        <input type="hidden" name="mailing_address" value="{{ mailing_address }}">
+        <input type="hidden" name="total_due" value="{{ total_due }}">
+        <input type="hidden" name="calculated_value" value="{{ calculated_value }}">
+        <input type="hidden" name="map_url" value="{{ map_url }}">
+        <input type="hidden" name="street_view_url" value="{{ street_view_url }}">
+        <input type="hidden" name="lat_lng" value="{{ lat_lng }}">  <!-- Pass lat_lng here -->
+        <button type="submit">Go back to search</button>
+    </form>
+</body>
+</html>

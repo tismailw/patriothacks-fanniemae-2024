@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Calculator</title>
+</head>
+<body>
+    <h1>Mortgage Calculator</h1>
+
+    <!-- Display the home details -->
+    <p><strong>Mailing Address:</strong> {{ mailing_address }}</p>
+    <p><strong>Cost of home:</strong> {{ calculated_value  }}</p>
+    <p><strong>Down Payment:</strong> {{ down_payment }}</p>
+    <p><strong>Interest Rate:</strong> {{ interest_rate }}</p>
+
+
+    <!-- Display the calculated mortgage payments -->
+    <h2>Mortgage Payment Results</h2>
+    
+    <p>30-Year Fixed Mortgage: {{ mortgage_30_year }}</p>
+    <p>15-Year Fixed Mortgage: {{ mortgage_15_year }}</p>
+    <p>5/1 ARM: {{ mortgage_arm }}</p>
+
+    <!-- Form for calculating the mortgage -->
+    <form action="/mortgage" method="POST">
+        <label for="down_payment">Down Payment ($):</label>
+        <input type="text" id="down_payment" name="down_payment" placeholder="Enter down payment" required>
+
+        <br><br>
+
+        <label for="interest_rate">Interest Rate (%):</label>
+        <input type="text" id="interest_rate" name="interest_rate" value="7">
+
+        <!-- Hidden fields to pass the home data -->
+        <input type="hidden" name="calculated_value" value="{{ calculated_value }}">
+        <input type="hidden" name="owner" value="{{ owner }}">
+        <input type="hidden" name="mailing_address" value="{{ mailing_address }}">
+        <input type="hidden" name="total_due" value="{{ total_due }}">
+        <input type="hidden" name="map_url" value="{{ map_url }}">
+        <input type="hidden" name="street_view_url" value="{{ street_view_url }}">
+        <input type="hidden" name="lat_lng" value="{{ lat_lng }}">  <!-- Pass lat_lng here -->
+
+        <br><br>
+
+        <!-- Submit button -->
+        <button type="submit">Calculate Mortgage</button>
+    </form>
+
+    <br><br>
+    <!-- Go back to general_info.html -->
+    <br><br>
+    <form action="/general_info" method="POST">
+        <input type="hidden" name="owner" value="{{ owner }}">
+        <input type="hidden" name="mailing_address" value="{{ mailing_address }}">
+        <input type="hidden" name="total_due" value="{{ total_due }}">
+        <input type="hidden" name="calculated_value" value="{{ calculated_value }}">
+        <input type="hidden" name="map_url" value="{{ map_url }}">
+        <input type="hidden" name="street_view_url" value="{{ street_view_url }}">
+        <input type="hidden" name="lat_lng" value="{{ lat_lng }}">  <!-- Pass lat_lng here -->
+
+        <button type="submit">Go back to search</button>
+    </form>
+</body>
+</html>
