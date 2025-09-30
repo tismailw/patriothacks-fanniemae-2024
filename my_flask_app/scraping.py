@@ -12,7 +12,7 @@ import time
 # flask instance
 scraping = Flask(__name__)
 
-GOOGLE_API_KEY = 'AIzaSyCuiU5o34o8fmb_IwrcxADz-QS8ZWRm22k'
+GOOGLE_API_KEY = 'GOOGLE_API_KEY'
 
 
 
